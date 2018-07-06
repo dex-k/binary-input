@@ -29,15 +29,24 @@ body {
     background-color: #535c68;
     height: 4em;
     width: 4em;
-    margin: 1em;
+    margin: .5em;
     border-radius: .5em;
 }
 
-.bit::after {
-    content: "0";
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.bit:after {
+    content: "_";
+    font-family: 'Courier New', Courier, monospace;
     font-size: 2em;
-    line-height: 0;
     font-weight: bold;
     color: white;
+
+    transition: all 1s;
+}
+/* special class to add a 0 to el */
+.zero:after {
+    content: '0';
+}
+/* special class to add 1 to el */
+.one:after {
+    content: '1';
 }
