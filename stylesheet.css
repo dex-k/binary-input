@@ -1,0 +1,43 @@
+* {
+    /* border: 1px solid red; */
+}
+
+body {
+    background-color: snow;
+}
+
+.container {
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+}
+
+.input {
+    display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+    padding: 1em;
+}
+
+.bit {
+    display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    background-color: #535c68;
+    height: 4em;
+    width: 4em;
+    margin: 1em;
+    border-radius: .5em;
+}
+
+.bit::after {
+    content: "0";
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2em;
+    line-height: 0;
+    font-weight: bold;
+    color: white;
+}
