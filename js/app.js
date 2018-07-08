@@ -1,5 +1,6 @@
 let pointer = 0; //controls which bit is being edited;
 const bits = 8; //length of input
+let cursorBlinkRate = 1000;
 
 //content = what to set to, either zero, one or clear
 //bit specifies a single bit to change, otherwise all are set
@@ -67,6 +68,11 @@ function get(bit) {
     }
 }
 
+function setAccent(bit) {
+    $('.bit').removeClass('accent')
+             .eq(bit).addClass('accent');;
+}
+
 function keypress (key) {
     // console.log(key.which);
     switch (key.which) {
@@ -84,8 +90,16 @@ function keypress (key) {
             //spacebar
             // console.log('space pressed');
             set(undefined, pointer);
+        default:
+            console.log("ERROR: invalid keypress")
+            return false;
     }
+    increment();
+}
+
+function increment() {
     pointer = (pointer + 1) % bits; //increments the pointer, looping back to the start
+    setAccent(pointer);
     if (pointer == 0) { submit() }; //if a full byte is completed
 }
 
@@ -93,7 +107,12 @@ function submit() {
 
 }
 
+const blink = setInterval( function(){
+    $('.bit').toggleClass('blink');
+}, cursorBlinkRate)
+
 $(document).ready(function(){
-    console.log('ready')
+    console.log('ready');
+    setAccent(pointer);
     document.addEventListener("keypress", keypress);
 });
