@@ -5,6 +5,7 @@ let cursorBlinkRate = 530;
 //content = what to set to, either zero, one or clear
 //bit specifies a single bit to change, otherwise all are set
 let set = function (content, bit) {
+    console.log("set(",content,",",bit,")");
     let target;
     if (bit == undefined) {
         //i.e. target unspecified
@@ -73,25 +74,28 @@ let setAccent = function(bit) {
              .eq(bit).addClass('accent');;
 }
 
-let keypress = function(key) {
+let keydown = function(key) {
+    
     // console.log(key.which);
     switch (key.which) {
-        case 48:
-            //0 or numpad0
+        case 48: //0 or numpad0
             // console.log('0 pressed');
             set(0, pointer); //set the bit at pointer to 0
             break;
-        case 49:
-            //1 or numpad1
+        case 49: //1 or numpad1
             // console.log('1 pressed');
             set(1, pointer);
             break;
-        case 32:
-            //spacebar
+        case 32: //spacebar
             // console.log('space pressed');
             set(undefined, pointer);
+            break;
+        case 8: //backspace
+            // console.log('backspace pressed')
+            decrement();
+            return;
         default:
-            console.log("ERROR: invalid keypress")
+            console.log("ERROR: invalid key:", key.which)
             return false;
     }
     increment();
@@ -100,6 +104,13 @@ let keypress = function(key) {
 let increment = function() {
     if (pointer == (bits - 1) ) { submit() }; //if a full byte is completed
     pointer = (pointer + 1) % bits; //increments the pointer, looping back to the start
+    setAccent(pointer);
+}
+
+let decrement = function() {
+    if (pointer == 0) { return; }; //if at the start, ignore
+    pointer = pointer - 1;
+    set(undefined, pointer);
     setAccent(pointer);
 }
 
@@ -130,17 +141,19 @@ let binaryArrayToString = function(array) {
     return string;
 }
 
-let init = function() {
-    setAccent(pointer);
-    $('.output').attr('data-output', '~');
-}
-
 const blink = setInterval( function(){
     $('.bit').toggleClass('blink');
 }, cursorBlinkRate)
 
 $(document).ready(function(){
     console.log('ready');
-    init();
-    document.addEventListener("keypress", keypress);
+    setAccent(pointer);
+    $('.output').attr('data-output', '~');
+    setTimeout( function() {
+        $('.info').css('top', '1em');
+    }, 500);
+    document.addEventListener("keydown", keydown);
+    $('.info-close').click( function(){
+        $('.info').css('display','none')
+    });
 });

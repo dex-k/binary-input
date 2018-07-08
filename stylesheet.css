@@ -7,6 +7,7 @@ body {
     height: 100%;
     width: 100%;
     margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -17,14 +18,36 @@ body {
         align-items: center;
         justify-content: space-evenly;
 }
-.settings {
-    display: none;
+.info {
+    position: absolute;
+        top: -2em;
+        left: 50%;
+        transform: translateX(-50%);
+    display: flex;
+        flex-direction: row;
+        /* align-content: center; */
+        align-items: center;
+        justify-content: center;
+    background-color: #eb4d4b;
+    color: snow;
+    height: 2em;
+    padding: 0 .5em;
+    border-radius: .25em;
+    transition: top 1s, display .1s;
+}
+.info p {
+    margin: 0;
+    margin-right: .1em;
+    line-height: 0;
+}
+.info i:hover {
+    cursor: pointer;
 }
 .input {
     display: flex;
         flex-direction: row;
-        align-content: center;
-        align-items: baseline;
+        /* align-content: center; */
+        align-items: center;
         justify-content: center;
     /* flex-grow: 1; */
 }
