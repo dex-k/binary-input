@@ -18,7 +18,7 @@ body {
         justify-content: center;
 }
 
-.input {
+#input {
     display: flex;
         flex-direction: row;
         align-content: center;
@@ -66,3 +66,4 @@ body {
 .accent.blink:after {
     display: none;
 }
+
