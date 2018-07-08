@@ -3,7 +3,7 @@
 } */
 
 body {
-    background-color: snow;
+    background-color: #ecf0f1;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -15,15 +15,18 @@ body {
     display: flex;
     flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
 }
-
-#input {
+.settings {
+    display: none;
+}
+.input {
     display: flex;
         flex-direction: row;
         align-content: center;
         align-items: baseline;
         justify-content: center;
+    /* flex-grow: 1; */
 }
 
 .bit {
@@ -38,7 +41,7 @@ body {
     border-radius: .5em;
 }
 
-.bit:before {
+.bit::before {
     content: "_";
     font-family: 'Courier New', Courier, monospace;
     font-size: 2em;
@@ -46,24 +49,48 @@ body {
     color: white;
 }
 /* special class to add a 0 to el */
-.zero:before {
+.zero::before {
     content: '0';
 }
 /* special class to add 1 to el */
-.one:before {
+.one::before {
     content: '1';
 }
 /* special class to add accent dot */
-.accent:after {
+.accent::after {
     content: "\25cf";
     position: relative;
-    color: red;
+    color: #1abc9c;
     top: 1.5em;
     line-height: 0;
     /* margin-left: calc(50% - 0.5em); */
 }
 
-.accent.blink:after {
+.accent.blink::after {
     display: none;
 }
 
+.output-container {
+    background-color: #7ed6df;
+    border-radius: 1em;
+    padding: 1em .75em;
+}
+.output {
+    background-color: snow;
+    height: 9.5em;
+    width: 9.5em;
+    margin: 0;
+    border-radius: .5em;
+
+    display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+}
+.output::before {
+    content: attr(data-output);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 8em;
+    font-weight: auto;
+    color: #535c68;
+}

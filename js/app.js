@@ -1,6 +1,6 @@
 let pointer = 0; //controls which bit is being edited;
 const bits = 8; //length of input
-let cursorBlinkRate = 1000;
+let cursorBlinkRate = 530;
 
 //content = what to set to, either zero, one or clear
 //bit specifies a single bit to change, otherwise all are set
@@ -109,7 +109,12 @@ let submit = function() {
     const decimalVal = parseInt(bitString, 2);
     const char = String.fromCharCode(decimalVal);
     console.log(bitArray, bitString, decimalVal, char);
+    output(char);
     set();
+}
+
+let output = function(char) {
+    $('.output').attr('data-output', char);
 }
 
 let binaryArrayToString = function(array) {
@@ -125,12 +130,17 @@ let binaryArrayToString = function(array) {
     return string;
 }
 
+let init = function() {
+    setAccent(pointer);
+    $('.output').attr('data-output', '~');
+}
+
 const blink = setInterval( function(){
     $('.bit').toggleClass('blink');
 }, cursorBlinkRate)
 
 $(document).ready(function(){
     console.log('ready');
-    setAccent(pointer);
+    init();
     document.addEventListener("keypress", keypress);
 });
