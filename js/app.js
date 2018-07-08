@@ -4,7 +4,7 @@ let cursorBlinkRate = 1000;
 
 //content = what to set to, either zero, one or clear
 //bit specifies a single bit to change, otherwise all are set
-function set (content, bit) {
+let set = function (content, bit) {
     let target;
     if (bit == undefined) {
         //i.e. target unspecified
@@ -36,7 +36,7 @@ function set (content, bit) {
     }
 }
 
-function get(bit) {
+let get = function(bit) {
     if (bit == undefined) {
         //i.e. all bits
         let output = [];
@@ -68,12 +68,12 @@ function get(bit) {
     }
 }
 
-function setAccent(bit) {
+let setAccent = function(bit) {
     $('.bit').removeClass('accent')
              .eq(bit).addClass('accent');;
 }
 
-function keypress (key) {
+let keypress = function(key) {
     // console.log(key.which);
     switch (key.which) {
         case 48:
@@ -97,14 +97,32 @@ function keypress (key) {
     increment();
 }
 
-function increment() {
+let increment = function() {
+    if (pointer == (bits - 1) ) { submit() }; //if a full byte is completed
     pointer = (pointer + 1) % bits; //increments the pointer, looping back to the start
     setAccent(pointer);
-    if (pointer == 0) { submit() }; //if a full byte is completed
 }
 
-function submit() {
+let submit = function() {
+    const bitArray = get();
+    const bitString = binaryArrayToString(bitArray);
+    const decimalVal = parseInt(bitString, 2);
+    const char = String.fromCharCode(decimalVal);
+    console.log(bitArray, bitString, decimalVal, char);
+    set();
+}
 
+let binaryArrayToString = function(array) {
+    let string = '';
+    for (i = 0; i < array.length; i++) {
+        if ( (array[i] != 0) && (array[i] != 1) ) {
+            console.log('ERROR:binary array contained char other than 0 or 1');
+            return "ERROR"
+        }
+        string += array[i];
+    }
+    // console.log(string);
+    return string;
 }
 
 const blink = setInterval( function(){

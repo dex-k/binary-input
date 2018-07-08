@@ -61,8 +61,8 @@ body {
     top: 1.5em;
     line-height: 0;
     /* margin-left: calc(50% - 0.5em); */
-
 }
+
 .accent.blink:after {
     display: none;
 }
